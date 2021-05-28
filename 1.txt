@@ -1,0 +1,172 @@
+// ==UserScript==
+// @name Convert PT
+// @version 1.0
+// @description Convert URL to old URL Extension(https://developercommunity.visualstudio.com/)
+// @icon https://www.microsoft.com/favicon.ico?v2
+// @license GPL version 3
+// @encoding utf-8
+// @date 10/22/2020
+// @modified 10/22/2020
+// @author Edward Han
+// @supportURL https://developercommunity.visualstudio.com/
+// @include http*://developercommunity.visualstudio.com/content/problem/*/*
+// @include http*://developercommunity2.visualstudio.com/t/*/*
+// @include http*://community.playfab.com/questions/*/*
+// @exclude https://social.technet.microsoft.com/Forums/*/home*
+// @grant none
+// @copyright 2015-2018, Jeffrey Chen, Franklin Chen, Gary Liu
+
+
+
+// @require http://code.jquery.com/ui/1.12.1/jquery-ui.js
+// ==/UserScript==
+(function (window) {
+'use strict';
+if (typeof window.PTaddin !== 'undefined') {
+return;
+}
+/*
+var rootElement = document.getElementById('eas-iframe');
+
+
+
+if (rootElement !== null) {
+return;
+}
+*/
+var platforms = [],
+url = location.href,
+options = {};
+/*
+function getByValue(arr, value) {
+for (var i = 0, iLen = arr.length; i < iLen; i++) {
+if (arr[i].getAttribute("rel") == value) return arr[i];
+}
+}
+*/
+if (window.location.hostname === 'powerusers.microsoft.com' || window.location.hostname === 'community.powerbi.com') {
+var links = document.head.getElementsByTagName("link");
+var link = getByValue(links, 'canonical');
+url = link.getAttribute("href");
+}
+
+
+
+platforms.push({
+'name': 'developcommunity2',
+'id': 10,
+'instanceIdIndex': 1,
+'exp': new RegExp('developercommunity2.visualstudio.com/t/*/([0-9]*)'),
+});
+
+
+
+
+function getCurrentPlatform() {
+for (var name in platforms) {
+if (platforms[name].exp !== undefined) {
+if (platforms[name].exp.test(url)) {
+return platforms[name];
+}
+}
+}
+
+
+
+return null;
+}
+
+
+
+
+var platform = getCurrentPlatform();
+
+
+
+if (platform === null) {
+console.log("not supported platform");
+
+
+
+return;
+}
+
+
+
+var array = platform.exp.exec(url);
+
+
+
+var indentity = array[platform.instanceIdIndex];
+
+
+
+console.log('indentity = ' + indentity);
+
+
+
+// load options from local storage
+var auto = localStorage.getItem(platform.name + ".auto");
+
+
+
+options.auto = (auto !== undefined && auto === 'true');
+var windowObjectReference = null;
+
+
+
+function render() {
+
+
+
+// var addin_str = '<div id="addin" class="addin" style="width:360px;position:fixed;right:0;top: 50px;z-index:999;display:none"><iframe style="width:360px;height:420px" src="https://platinum-ui-v2-slot.azurewebsites.net/#/addin/' + platform.name + '/' + indentity + '" /></div>';
+var PT_button = $('<img src="https://www.microsoft.com/favicon.ico?v2" alt="Open PT Addin" style="position:fixed;right:10px;bottom: 10px;height:24px;cursor: pointer;z-index:999">');
+PT_button.click(openDialog);
+PT_button.appendTo($('body'))
+// $(addin_str).appendTo($('body'));
+
+
+
+var src = "https://platinum-ui-v2-slot.azurewebsites.net/addin/" + platform.name + '/' + indentity;
+
+
+
+function openDialog() {
+if (windowObjectReference == null || windowObjectReference.closed)
+/* if the pointer to the window object in memory does not exist
+or if such pointer exists but the window was closed */
+
+
+
+{
+if (window.location.hostname === 'developercommunity2.visualstudio.com') {
+var result = url.split(".com/t/")
+if (url.indexOf("from=email") != -1)
+{
+var result2 = result[1].split("?from=email")
+}
+else
+{
+result2 = result[1].split("?preview")
+}
+var title = result2[0].substring(0,(result2[0].length-8))
+var id = result2[0].substring((result2[0].length-7))
+var newURL = "https://developercommunity.visualstudio.com/content/problem/" + id + "/" + title + ".html"
+window.location.href = newURL
+}
+} else {
+windowObjectReference.focus();
+/* else the window reference must exist and the window
+is not closed; therefore, we can bring it back on top of any other
+window with the focus() method. There would be no need to re-create
+the window or to reload the referenced resource. */
+};
+//$("#addin").toggle();
+}
+}
+
+
+
+render();
+window.PTaddin = this;
+})(window);

@@ -1,0 +1,1099 @@
+[2021-04-12 09:10:12Z INFO Program] Version: 2.183.1
+[2021-04-12 09:10:12Z INFO Program] Commit: b8617e6e12e82ae37ff5e54627392087788f6561
+[2021-04-12 09:10:12Z INFO Program] Culture: zh-CN
+[2021-04-12 09:10:12Z INFO Program] UI Culture: en-US
+[2021-04-12 09:10:12Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:12Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:12Z INFO HostContext] Well known config file 'Proxy': 'C:\agent-yifhe\.proxy'
+[2021-04-12 09:10:12Z INFO VstsAgentWebProxy] No proxy setting found.
+[2021-04-12 09:10:12Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:12Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:12Z INFO HostContext] Well known config file 'Certificates': 'C:\agent-yifhe\.certificates'
+[2021-04-12 09:10:12Z INFO AgentCertificateManager] No certificate setting found.
+[2021-04-12 09:10:12Z INFO Worker] Waiting to receive the job message from the channel.
+[2021-04-12 09:10:12Z INFO Worker] Message received.
+[2021-04-12 09:10:12Z INFO Worker] Job message:
+ {
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "inputs": {
+        "repository": "__designer_repo",
+        "clean": "false",
+        "fetchDepth": "0",
+        "lfs": "false"
+      },
+      "type": "task",
+      "reference": {
+        "id": "6d15af64-176c-496d-b583-fd2ae21d4df4",
+        "name": "Checkout",
+        "version": "1.0.0"
+      },
+      "id": "771d55ec-34a7-5ddd-398e-3e8e57b4f3f0",
+      "name": "Checkout",
+      "displayName": "Checkout"
+    },
+    {
+      "type": "task",
+      "reference": {
+        "id": "ae214784-0f5e-451f-b615-042bce65d833",
+        "name": "nuget-security-analysis",
+        "version": "0.2.39"
+      },
+      "condition": "succeeded()",
+      "timeoutInMinutes": 1,
+      "id": "7b920b4a-56d1-5395-4267-42324f55afe3",
+      "name": "__system_postcheckout_1",
+      "displayName": "Nuget Security Analysis (auto-injected by policy)"
+    },
+    {
+      "inputs": {
+        "ConnectedServiceNameARM": "02806752-62ad-452d-aaf5-4f8c79003bb7",
+        "ScriptType": "InlineScript",
+        "ScriptPath": "",
+        "Inline": "Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force",
+        "ScriptArguments": "",
+        "errorActionPreference": "stop",
+        "FailOnStandardError": "false",
+        "TargetAzurePs": "OtherVersion",
+        "CustomTargetAzurePs": "3.1.0",
+        "pwsh": "false",
+        "workingDirectory": ""
+      },
+      "type": "task",
+      "reference": {
+        "id": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+        "name": "AzurePowerShell",
+        "version": "5.184.1"
+      },
+      "condition": "succeeded()",
+      "id": "b3b67622-0f16-555e-6574-f031225f4b13",
+      "name": "AzurePowerShell",
+      "displayName": "Azure PowerShell script: InlineScript"
+    },
+    {
+      "inputs": {
+        "sourceScanPath": "$(Agent.BuildDirectory)",
+        "autoInjected": "true"
+      },
+      "type": "task",
+      "reference": {
+        "id": "f2f0881f-4b99-4a1c-80ea-f5b13fd6cec4",
+        "name": "ComponentGovernanceComponentDetection",
+        "version": "0.2120401.1"
+      },
+      "condition": "and(succeeded(), ne(variables['CG_RAN'], 'true'))",
+      "continueOnError": true,
+      "timeoutInMinutes": 8,
+      "id": "192302d7-677f-5a6d-f304-1e32baf26ea7",
+      "name": "__system_post_1",
+      "displayName": "Component Detection (auto-injected by policy)"
+    }
+  ],
+  "variables": {
+    "system.debug": {
+      "value": "false"
+    },
+    "resources.triggeringCategory": {
+      "value": ""
+    },
+    "resources.triggeringAlias": {
+      "value": ""
+    },
+    "system": {
+      "value": "build",
+      "isReadOnly": true
+    },
+    "system.hosttype": {
+      "value": "build",
+      "isReadOnly": true
+    },
+    "system.servertype": {
+      "value": "Hosted",
+      "isReadOnly": true
+    },
+    "system.culture": {
+      "value": "en-US",
+      "isReadOnly": true
+    },
+    "system.collectionId": {
+      "value": "1185492a-3d2f-4555-aeca-5946c9e7a24e",
+      "isReadOnly": true
+    },
+    "system.collectionUri": {
+      "value": "https://dev.azure.com/v-yifhe/",
+      "isReadOnly": true
+    },
+    "system.teamFoundationCollectionUri": {
+      "value": "https://dev.azure.com/v-yifhe/",
+      "isReadOnly": true
+    },
+    "system.taskDefinitionsUri": {
+      "value": "https://dev.azure.com/v-yifhe/",
+      "isReadOnly": true
+    },
+    "system.pipelineStartTime": {
+      "value": "2021-04-12 09:10:09+00:00",
+      "isReadOnly": true
+    },
+    "system.teamProject": {
+      "value": "pipeline-test",
+      "isReadOnly": true
+    },
+    "system.teamProjectId": {
+      "value": "33017b2e-5269-498c-acbd-82198e78b3f5",
+      "isReadOnly": true
+    },
+    "system.definitionId": {
+      "value": "72",
+      "isReadOnly": true
+    },
+    "build.definitionName": {
+      "value": "az cloudservice",
+      "isReadOnly": true
+    },
+    "build.definitionVersion": {
+      "value": "6",
+      "isReadOnly": true
+    },
+    "build.queuedBy": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.queuedById": {
+      "value": "4e3e3db7-95e7-6b12-b047-ee50e23704d9",
+      "isReadOnly": true
+    },
+    "build.requestedFor": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.requestedForId": {
+      "value": "4e3e3db7-95e7-6b12-b047-ee50e23704d9",
+      "isReadOnly": true
+    },
+    "build.requestedForEmail": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.sourceVersion": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.sourceBranch": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.sourceBranchName": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.reason": {
+      "value": "Manual",
+      "isReadOnly": true
+    },
+    "system.pullRequest.isFork": {
+      "value": "False",
+      "isReadOnly": true
+    },
+    "system.jobParallelismTag": {
+      "value": "Private",
+      "isReadOnly": true
+    },
+    "MSDEPLOY_HTTP_USER_AGENT": {
+      "value": "VSTS_1185492a-3d2f-4555-aeca-5946c9e7a24e_build_72_0",
+      "isReadOnly": true
+    },
+    "AZURE_HTTP_USER_AGENT": {
+      "value": "VSTS_1185492a-3d2f-4555-aeca-5946c9e7a24e_build_72_0",
+      "isReadOnly": true
+    },
+    "build.buildId": {
+      "value": "286",
+      "isReadOnly": true
+    },
+    "build.buildUri": {
+      "value": "vstfs:///Build/Build/286",
+      "isReadOnly": true
+    },
+    "build.buildNumber": {
+      "value": "286",
+      "isReadOnly": true
+    },
+    "build.containerId": {
+      "value": "14371995",
+      "isReadOnly": true
+    },
+    "system.isScheduled": {
+      "value": "False",
+      "isReadOnly": true
+    },
+    "system.definitionName": {
+      "value": "az cloudservice",
+      "isReadOnly": true
+    },
+    "system.planId": {
+      "value": "1904fad3-ad41-43e7-8f07-682011a6b25b",
+      "isReadOnly": true
+    },
+    "system.timelineId": {
+      "value": "1904fad3-ad41-43e7-8f07-682011a6b25b",
+      "isReadOnly": true
+    },
+    "system.stageDisplayName": {
+      "value": "__default",
+      "isReadOnly": true
+    },
+    "system.stageId": {
+      "value": "96ac2280-8cb4-5df5-99de-dd2da759617d",
+      "isReadOnly": true
+    },
+    "system.stageName": {
+      "value": "__default",
+      "isReadOnly": true
+    },
+    "system.stageAttempt": {
+      "value": "1",
+      "isReadOnly": true
+    },
+    "system.phaseDisplayName": {
+      "value": "Agent job 1",
+      "isReadOnly": true
+    },
+    "system.phaseId": {
+      "value": "2f97f1d8-943c-5cda-8782-cbcebf2b3d67",
+      "isReadOnly": true
+    },
+    "system.phaseName": {
+      "value": "Job_1",
+      "isReadOnly": true
+    },
+    "system.phaseAttempt": {
+      "value": "1",
+      "isReadOnly": true
+    },
+    "system.jobIdentifier": {
+      "value": "Job_1.__default",
+      "isReadOnly": true
+    },
+    "system.jobAttempt": {
+      "value": "1",
+      "isReadOnly": true
+    },
+    "System.JobPositionInPhase": {
+      "value": "1",
+      "isReadOnly": true
+    },
+    "System.TotalJobsInPhase": {
+      "value": "1",
+      "isReadOnly": true
+    },
+    "system.jobDisplayName": {
+      "value": "Agent job 1",
+      "isReadOnly": true
+    },
+    "system.jobId": {
+      "value": "275f1d19-1bd8-5591-b06b-07d489ea915a",
+      "isReadOnly": true
+    },
+    "system.jobName": {
+      "value": "__default",
+      "isReadOnly": true
+    },
+    "system.jobTimeout": {
+      "value": "60",
+      "isReadOnly": true
+    },
+    "agent.retainDefaultEncoding": {
+      "value": "false",
+      "isReadOnly": true
+    },
+    "agent.LogToBlobstorageService": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "agent.readOnlyVariables": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "agent.useWorkspaceId": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "agent.taskRestrictionsEnforcementMode": {
+      "value": "WarningOnly",
+      "isReadOnly": true
+    },
+    "agent.enableTaskRestrictionsTelemetry": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "agent.disablelogplugin.TestResultLogPlugin": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "agent.disablelogplugin.TestFilePublisherPlugin": {
+      "value": "true",
+      "isReadOnly": true
+    },
+    "build.repository.id": {
+      "value": "f62ed3ad-6801-4933-9a39-10a960f51f3f",
+      "isReadOnly": true
+    },
+    "build.repository.name": {
+      "value": "Az.CloudService",
+      "isReadOnly": true
+    },
+    "build.repository.uri": {
+      "value": "https://v-yifhe@dev.azure.com/v-yifhe/pipeline-test/_git/Az.CloudService",
+      "isReadOnly": true
+    },
+    "build.sourceVersionAuthor": {
+      "value": "[PII]",
+      "isReadOnly": true
+    },
+    "build.sourceVersionMessage": {
+      "value": "Added README.md",
+      "isReadOnly": true
+    }
+  },
+  "messageType": "PipelineAgentJobRequest",
+  "plan": {
+    "scopeIdentifier": "33017b2e-5269-498c-acbd-82198e78b3f5",
+    "planType": "Build",
+    "version": 16,
+    "planId": "1904fad3-ad41-43e7-8f07-682011a6b25b",
+    "planGroup": "Build:33017b2e-5269-498c-acbd-82198e78b3f5:286",
+    "artifactUri": "vstfs:///Build/Build/286",
+    "artifactLocation": null,
+    "definition": {
+      "_links": {
+        "web": {
+          "href": "https://dev.azure.com/v-yifhe/33017b2e-5269-498c-acbd-82198e78b3f5/_build/definition?definitionId=72"
+        },
+        "self": {
+          "href": "https://dev.azure.com/v-yifhe/33017b2e-5269-498c-acbd-82198e78b3f5/_apis/build/Definitions/72"
+        }
+      },
+      "id": 72,
+      "name": "az cloudservice"
+    },
+    "owner": {
+      "_links": {
+        "web": {
+          "href": "https://dev.azure.com/v-yifhe/33017b2e-5269-498c-acbd-82198e78b3f5/_build/results?buildId=286"
+        },
+        "self": {
+          "href": "https://dev.azure.com/v-yifhe/33017b2e-5269-498c-acbd-82198e78b3f5/_apis/build/Builds/286"
+        }
+      },
+      "id": 286,
+      "name": "286"
+    }
+  },
+  "timeline": {
+    "id": "1904fad3-ad41-43e7-8f07-682011a6b25b",
+    "changeId": 5,
+    "location": null
+  },
+  "jobId": "275f1d19-1bd8-5591-b06b-07d489ea915a",
+  "jobDisplayName": "Agent job 1",
+  "jobName": "__default",
+  "jobContainer": null,
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "subscriptionId": "daaeef3e-d7fe-49e8-baaa-b3df9d072825",
+          "subscriptionName": "Microsoft Azure Internal Consumption",
+          "environment": "AzureCloud",
+          "scopeLevel": "Subscription",
+          "creationMode": "Automatic",
+          "azureSpnRoleAssignmentId": "b9b2ea96-1d6f-4768-9fa6-465b636eaa7d",
+          "azureSpnPermissions": "[{\"roleAssignmentId\":\"b9b2ea96-1d6f-4768-9fa6-465b636eaa7d\",\"resourceProvider\":\"Microsoft.RoleAssignment\",\"provisioned\":true}]",
+          "spnObjectId": "88a94ef0-780a-4340-a7cf-b106c0e9b53a",
+          "appObjectId": "71ed7219-bad0-423b-b003-47bf84408990",
+          "environmentUrl": "https://management.azure.com/",
+          "galleryUrl": "https://gallery.azure.com/",
+          "serviceManagementUrl": "https://management.core.windows.net/",
+          "resourceManagerUrl": "https://management.azure.com/",
+          "activeDirectoryAuthority": "https://login.microsoftonline.com/",
+          "environmentAuthorityUrl": "https://login.windows.net/",
+          "graphUrl": "https://graph.windows.net/",
+          "managementPortalUrl": "https://manage.windowsazure.com/",
+          "armManagementPortalUrl": "https://portal.azure.com/",
+          "activeDirectoryServiceEndpointResourceId": "https://management.core.windows.net/",
+          "sqlDatabaseDnsSuffix": ".database.windows.net",
+          "AzureKeyVaultDnsSuffix": "vault.azure.net",
+          "AzureKeyVaultServiceEndpointResourceId": "https://vault.azure.net",
+          "StorageEndpointSuffix": "core.windows.net",
+          "EnableAdfsAuthentication": "false"
+        },
+        "id": "02806752-62ad-452d-aaf5-4f8c79003bb7",
+        "name": "Microsoft Azure Internal Consumption (daaeef3e-d7fe-49e8-baaa-b3df9d072825)",
+        "type": "azurerm",
+        "owner": "Library",
+        "url": "https://management.azure.com/",
+        "createdBy": {
+          "displayName": "Yifan He",
+          "url": "https://spsprodea1.vssps.visualstudio.com/A9c74e458-b325-4880-80ef-ca67b6f44c73/_apis/Identities/4e3e3db7-95e7-6b12-b047-ee50e23704d9",
+          "_links": {
+            "avatar": {
+              "href": "https://dev.azure.com/v-yifhe/_apis/GraphProfile/MemberAvatars/aad.NGUzZTNkYjctOTVlNy03YjEyLWIwNDctZWU1MGUyMzcwNGQ5"
+            }
+          },
+          "id": "4e3e3db7-95e7-6b12-b047-ee50e23704d9",
+          "uniqueName": "v-yifhe@microsoft.com",
+          "imageUrl": "https://dev.azure.com/v-yifhe/_apis/GraphProfile/MemberAvatars/aad.NGUzZTNkYjctOTVlNy03YjEyLWIwNDctZWU1MGUyMzcwNGQ5",
+          "descriptor": "aad.NGUzZTNkYjctOTVlNy03YjEyLWIwNDctZWU1MGUyMzcwNGQ5"
+        },
+        "description": "",
+        "authorization": {
+          "parameters": {
+            "tenantid": "***",
+            "serviceprincipalid": "***",
+            "authenticationType": "***",
+            "serviceprincipalkey": ***
+          },
+          "scheme": "ServicePrincipal"
+        },
+        "isShared": false,
+        "isReady": true,
+        "operationStatus": {
+          "state": "Ready",
+          "statusMessage": ""
+        }
+      },
+      {
+        "data": {
+          "ServerId": "1185492a-3d2f-4555-aeca-5946c9e7a24e",
+          "ServerName": "v-yifhe"
+        },
+        "name": "SystemVssConnection",
+        "url": "https://dev.azure.com/v-yifhe/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": ***
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ],
+    "repositories": [
+      {
+        "properties": {
+          "id": "f62ed3ad-6801-4933-9a39-10a960f51f3f",
+          "type": "Git",
+          "name": "Az.CloudService",
+          "project": "33017b2e-5269-498c-acbd-82198e78b3f5",
+          "defaultBranch": "refs/heads/main",
+          "ref": "refs/heads/main",
+          "url": "https://v-yifhe@dev.azure.com/v-yifhe/pipeline-test/_git/Az.CloudService",
+          "version": "542058975e076f3bba81ea36367ce67060655e2a",
+          "versionInfo": {
+            "author": "[PII]"
+          }
+        },
+        "alias": "__designer_repo",
+        "endpoint": {
+          "name": "SystemVssConnection"
+        }
+      }
+    ]
+  }
+}
+[2021-04-12 09:10:12Z INFO JobRunner] Job ID 275f1d19-1bd8-5591-b06b-07d489ea915a
+[2021-04-12 09:10:12Z INFO JobRunner] Creating job server with URL: https://dev.azure.com/v-yifhe/
+[2021-04-12 09:10:12Z INFO VisualStudioServices] Starting operation Location.GetConnectionData
+[2021-04-12 09:10:12Z INFO Worker] Listening for cancel message from the channel.
+[2021-04-12 09:10:12Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2021-04-12 09:10:13Z INFO VisualStudioServices] Finished operation Location.GetConnectionData
+[2021-04-12 09:10:13Z INFO JobServerQueue] Start process web console line queue.
+[2021-04-12 09:10:13Z INFO JobServerQueue] Start process file upload queue.
+[2021-04-12 09:10:13Z INFO JobServerQueue] Start process timeline update queue.
+[2021-04-12 09:10:13Z INFO ConfigurationStore] currentAssemblyLocation: C:\agent-yifhe\bin\Agent.Worker.dll
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] binPath: C:\agent-yifhe\bin
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] RootFolder: C:\agent-yifhe
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'Agent': 'C:\agent-yifhe\.agent'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] ConfigFilePath: C:\agent-yifhe\.agent
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'Credentials': 'C:\agent-yifhe\.credentials'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] CredFilePath: C:\agent-yifhe\.credentials
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'Service': 'C:\agent-yifhe\.service'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] ServiceConfigFilePath: C:\agent-yifhe\.service
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'Autologon': 'C:\agent-yifhe\.autologon'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] AutoLogonSettingsFilePath: C:\agent-yifhe\.autologon
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'Options': 'C:\agent-yifhe\.options'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] RuntimeOptionsFilePath: C:\agent-yifhe\.options
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known config file 'SetupInfo': 'C:\agent-yifhe\.setup_info'
+[2021-04-12 09:10:13Z INFO ConfigurationStore] SetupInfoFilePath: C:\agent-yifhe\.setup_info
+[2021-04-12 09:10:13Z INFO ConfigurationStore] Read setting file: 165 chars
+[2021-04-12 09:10:13Z INFO ExecutionContext] WorkspaceIdentifier 'f1dee9c0c846c4f696cc1c30d2625202837aa76a' created for repos Microsoft.VisualStudio.Services.Agent.Worker.Build.RepositoryTrackingInfo
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO JobRunner] Starting the job execution context.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO JobRunner] Validating directory permissions for: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Externals': 'C:\agent-yifhe\externals'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'ServerOM': 'C:\agent-yifhe\externals\vstsom'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tools': 'C:\agent-yifhe\_work\_tool'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Temp': 'C:\agent-yifhe\_work\_temp'
+[2021-04-12 09:10:13Z INFO JobRunner] Creating task server with https://dev.azure.com/v-yifhe/
+[2021-04-12 09:10:13Z INFO VisualStudioServices] Starting operation Location.GetConnectionData
+[2021-04-12 09:10:13Z INFO VisualStudioServices] Finished operation Location.GetConnectionData
+[2021-04-12 09:10:13Z INFO JobRunner] Getting job extension.
+[2021-04-12 09:10:13Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.IJobExtension'
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.BuildJobExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Release.ReleaseJobExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Release.DeploymentJobExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Maintenance.MaintenanceJobExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO JobRunner] Initialize job. Getting all job steps.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Run initial step from extension BuildJobExtension.
+[2021-04-12 09:10:13Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.Build.ISourceProvider'
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.ExternalGitSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.GitHubSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.GitHubEnterpriseSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.BitbucketSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.SvnSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.TfsGitSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.TfsVCSourceProvider, Agent.Worker
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO BuildDirectoryManager] Checking if artifacts directory exists: 'C:\agent-yifhe\_work\1\a'
+[2021-04-12 09:10:13Z INFO BuildDirectoryManager] Creating artifacts directory.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO BuildDirectoryManager] Checking if test results directory exists: 'C:\agent-yifhe\_work\1\TestResults'
+[2021-04-12 09:10:13Z INFO BuildDirectoryManager] Creating test results directory.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO BuildDirectoryManager] Set repository path for repository __designer_repo to 'C:\agent-yifhe\_work\1\s'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Checking repository name __designer_repo
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Downloading task definitions.
+[2021-04-12 09:10:13Z INFO TaskManager] Skip download checkout task.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO TaskManager] Ensuring task exists: ID 'ae214784-0f5e-451f-b615-042bce65d833', version '0.2.39', name 'nuget-security-analysis', directory 'C:\agent-yifhe\_work\_tasks\nuget-security-analysis_ae214784-0f5e-451f-b615-042bce65d833\0.2.39'.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO TaskManager] Ensuring task exists: ID '72a1931b-effb-4d2e-8fd8-f8472a07cb62', version '5.184.1', name 'AzurePowerShell', directory 'C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1'.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO TaskManager] Ensuring task exists: ID 'f2f0881f-4b99-4a1c-80ea-f5b13fd6cec4', version '0.2120401.1', name 'ComponentGovernanceComponentDetection', directory 'C:\agent-yifhe\_work\_tasks\ComponentGovernanceComponentDetection_f2f0881f-4b99-4a1c-80ea-f5b13fd6cec4\0.2120401.1'.
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Parsing all task's condition inputs.
+[2021-04-12 09:10:13Z INFO ExpressionManager] Parsing expression: <succeeded()>
+[2021-04-12 09:10:13Z INFO ExpressionManager] Parsing expression: <succeeded()>
+[2021-04-12 09:10:13Z INFO ExpressionManager] Parsing expression: <and(succeeded(), ne(variables['CG_RAN'], 'true'))>
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'TaskZips': 'C:\agent-yifhe\_work\_taskzips'
+[2021-04-12 09:10:13Z INFO TaskManager] Loading task definition 'C:\agent-yifhe\_work\_tasks\nuget-security-analysis_ae214784-0f5e-451f-b615-042bce65d833\0.2.39\task.json'.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'TaskZips': 'C:\agent-yifhe\_work\_taskzips'
+[2021-04-12 09:10:13Z INFO TaskManager] Loading task definition 'C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1\task.json'.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'TaskZips': 'C:\agent-yifhe\_work\_taskzips'
+[2021-04-12 09:10:13Z INFO TaskManager] Loading task definition 'C:\agent-yifhe\_work\_tasks\ComponentGovernanceComponentDetection_f2f0881f-4b99-4a1c-80ea-f5b13fd6cec4\0.2120401.1\task.json'.
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Adding pre-job step from extension.
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Adding post-job step from extension.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Adding post-job steps from tasks.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:13Z INFO JobServerQueue] Try to append 1 batches web console lines for record '275f1d19-1bd8-5591-b06b-07d489ea915a', success rate: 1/1.
+[2021-04-12 09:10:13Z INFO BuildJobExtension] Total accessible running process: 239.
+[2021-04-12 09:10:13Z INFO JobRunner] Total job steps: 5.
+[2021-04-12 09:10:13Z INFO JobRunner] Run all job steps.
+[2021-04-12 09:10:13Z INFO StepsRunner] Processing step: DisplayName='Checkout Az.CloudService@main to s', ContinueOnError=False, Enabled=True
+[2021-04-12 09:10:13Z INFO ExpressionManager] Evaluating: SucceededNode()
+[2021-04-12 09:10:13Z INFO ExpressionManager] Result: True
+[2021-04-12 09:10:13Z INFO StepsRunner] Starting the step.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO StepsRunner] Which: 'chcp'
+[2021-04-12 09:10:13Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Process started with process id 5672, waiting for process exit.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Exited process 5672 with exit code 0
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Finished process 5672 with exit code 0, and elapsed time 00:00:00.0816527.
+[2021-04-12 09:10:13Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:13Z INFO TaskRunner] Get handler data for target platform Windows
+[2021-04-12 09:10:13Z INFO TaskRunner] Handler data is of type Microsoft.VisualStudio.Services.Agent.Worker.AgentPluginHandlerData
+[2021-04-12 09:10:13Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.IWorkerCommandExtension'
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.TaskCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.ArtifactCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Build.BuildCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.CodeCoverage.CodeCoverageCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.TestResults.ResultsCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Telemetry.TelemetryCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.Release.ReleaseCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO ExtensionManager] Creating instance: Microsoft.VisualStudio.Services.Agent.Worker.PluginInternalCommandExtension, Agent.Worker
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area task
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area artifact
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area build
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area codecoverage
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area results
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area telemetry
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area release
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Register command extension for area plugininternal
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.Repository.CheckoutTask, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '6d15af64-176c-496d-b583-fd2ae21d4df4' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.Repository.CleanupTask, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '6d15af64-176c-496d-b583-fd2ae21d4df4' (post).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTask, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.PublishPipelineArtifactTask, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id 'ecdc45f6-832d-4ad9-b52b-ee49e94659be' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.PublishPipelineArtifactTaskV1, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id 'ecdc45f6-832d-4ad9-b52b-ee49e94659be' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV1, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV1_1_0, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineCache.SavePipelineCacheV0, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id 'd53ccab4-555e-4494-9d06-11db043fb4a9' (post).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineCache.RestorePipelineCacheV0, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id 'd53ccab4-555e-4494-9d06-11db043fb4a9' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV1_1_1, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV1_1_2, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV1_1_3, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.DownloadPipelineArtifactTaskV2_0_0, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id '61f2a582-95ae-4948-b34d-a1b3c4f6a737' (main).
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Load task plugin from 'Agent.Plugins.PipelineArtifact.PublishPipelineArtifactTaskV0_140_0, Agent.Plugins'.
+[2021-04-12 09:10:13Z INFO AgentPluginManager] Loaded task plugin id 'ecdc45f6-832d-4ad9-b52b-ee49e94659be' (main).
+[2021-04-12 09:10:13Z INFO WorkerCommandManager] Enable plugin internal command extension.
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   File name: 'C:\agent-yifhe\bin\Agent.PluginHost.exe'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Arguments: 'task "Agent.Plugins.Repository.CheckoutTask, Agent.Plugins"'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'True'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Process started with process id 13200, waiting for process exit.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] Close STDIN after the first redirect finished.
+[2021-04-12 09:10:13Z INFO ProcessInvokerWrapper] STDIN stream write finished.
+[2021-04-12 09:10:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record '818dcf55-440a-4269-8042-c2ca103f6ce4', success rate: 1/1.
+[2021-04-12 09:10:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:14Z INFO VisualStudioServices] Starting operation Location.GetConnectionData
+[2021-04-12 09:10:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:15Z INFO VisualStudioServices] Finished operation Location.GetConnectionData
+[2021-04-12 09:10:15Z INFO VisualStudioServices] Starting operation Location.GetConnectionData
+[2021-04-12 09:10:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:15Z INFO VisualStudioServices] Finished operation Location.GetConnectionData
+[2021-04-12 09:10:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:16Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:16Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Exited process 13200 with exit code 0
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Finished process 13200 with exit code 0, and elapsed time 00:00:03.0772838.
+[2021-04-12 09:10:16Z INFO WorkerCommandManager] Disable plugin internal command extension.
+[2021-04-12 09:10:16Z INFO StepsRunner] Step result: 
+[2021-04-12 09:10:16Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2021-04-12 09:10:16Z INFO StepsRunner] Current state: job state = ''
+[2021-04-12 09:10:16Z INFO StepsRunner] Processing step: DisplayName='Nuget Security Analysis (auto-injected by policy)', ContinueOnError=False, Enabled=True
+[2021-04-12 09:10:16Z INFO ExpressionManager] Evaluating: succeeded()
+[2021-04-12 09:10:16Z INFO ExpressionManager] Result: True
+[2021-04-12 09:10:16Z INFO StepsRunner] Starting the step.
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:16Z INFO StepsRunner] Which: 'chcp'
+[2021-04-12 09:10:16Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Process started with process id 9516, waiting for process exit.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Exited process 9516 with exit code 0
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Finished process 9516 with exit code 0, and elapsed time 00:00:00.0085770.
+[2021-04-12 09:10:16Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'TaskZips': 'C:\agent-yifhe\_work\_taskzips'
+[2021-04-12 09:10:16Z INFO TaskManager] Loading task definition 'C:\agent-yifhe\_work\_tasks\nuget-security-analysis_ae214784-0f5e-451f-b615-042bce65d833\0.2.39\task.json'.
+[2021-04-12 09:10:16Z INFO TaskRunner] Get handler data for target platform Windows
+[2021-04-12 09:10:16Z INFO TaskRunner] Handler data is of type Microsoft.VisualStudio.Services.Agent.Worker.Node10HandlerData
+[2021-04-12 09:10:16Z INFO NodeHandler] Inspect node_modules folder, make sure vsts-task-lib doesn't overwrite String.startsWith/endsWith.
+[2021-04-12 09:10:16Z INFO NodeHandler] This task has already been scanned and corrected, no more operation needed.
+[2021-04-12 09:10:16Z INFO NodeHandler] Task.json has node10 handler data: True, use node10 for node tasks: False
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:16Z INFO HostContext] Well known directory 'Externals': 'C:\agent-yifhe\externals'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   File name: 'C:\agent-yifhe\externals\node10\bin\node.exe'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Arguments: '"C:\agent-yifhe\_work\_tasks\nuget-security-analysis_ae214784-0f5e-451f-b615-042bce65d833\0.2.39\index.js"'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work\1\s'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:16Z INFO ProcessInvokerWrapper] Process started with process id 22140, waiting for process exit.
+[2021-04-12 09:10:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record '771d55ec-34a7-5ddd-398e-3e8e57b4f3f0', success rate: 1/1.
+[2021-04-12 09:10:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record '7b920b4a-56d1-5395-4267-42324f55afe3', success rate: 1/1.
+[2021-04-12 09:10:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record '7b920b4a-56d1-5395-4267-42324f55afe3', success rate: 1/1.
+[2021-04-12 09:10:18Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Exited process 22140 with exit code 0
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Finished process 22140 with exit code 0, and elapsed time 00:00:02.2981248.
+[2021-04-12 09:10:19Z INFO StepsRunner] Step result: 
+[2021-04-12 09:10:19Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2021-04-12 09:10:19Z INFO StepsRunner] Current state: job state = ''
+[2021-04-12 09:10:19Z INFO StepsRunner] Processing step: DisplayName='Azure PowerShell script: InlineScript', ContinueOnError=False, Enabled=True
+[2021-04-12 09:10:19Z INFO ExpressionManager] Evaluating: succeeded()
+[2021-04-12 09:10:19Z INFO ExpressionManager] Result: True
+[2021-04-12 09:10:19Z INFO StepsRunner] Starting the step.
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:19Z INFO StepsRunner] Which: 'chcp'
+[2021-04-12 09:10:19Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Process started with process id 13848, waiting for process exit.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Exited process 13848 with exit code 0
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Finished process 13848 with exit code 0, and elapsed time 00:00:00.0073663.
+[2021-04-12 09:10:19Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:19Z INFO HostContext] Well known directory 'TaskZips': 'C:\agent-yifhe\_work\_taskzips'
+[2021-04-12 09:10:19Z INFO TaskManager] Loading task definition 'C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1\task.json'.
+[2021-04-12 09:10:19Z INFO TaskRunner] Get handler data for target platform Windows
+[2021-04-12 09:10:19Z INFO TaskRunner] Handler data is of type Microsoft.VisualStudio.Services.Agent.Worker.PowerShell3HandlerData
+[2021-04-12 09:10:19Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.IJobExtension'
+[2021-04-12 09:10:19Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.Build.ISourceProvider'
+[2021-04-12 09:10:19Z INFO BuildJobExtension] Build JobExtension resolving path use source provide: 
+[2021-04-12 09:10:19Z INFO BuildJobExtension] The Default Path Root of Build JobExtension is repository.path: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO BuildJobExtension] After prefix Default Path Root provide by JobExtension: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO BuildJobExtension] Return absolute path after prefix DefaultPathRoot: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO TaskRunner] Build JobExtension resolved a rooted path:: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.IJobExtension'
+[2021-04-12 09:10:19Z INFO ExtensionManager] Getting extensions for interface: 'Microsoft.VisualStudio.Services.Agent.Worker.Build.ISourceProvider'
+[2021-04-12 09:10:19Z INFO BuildJobExtension] Build JobExtension resolving path use source provide: 
+[2021-04-12 09:10:19Z INFO BuildJobExtension] The Default Path Root of Build JobExtension is repository.path: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO BuildJobExtension] After prefix Default Path Root provide by JobExtension: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO BuildJobExtension] Return absolute path after prefix DefaultPathRoot: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO TaskRunner] Build JobExtension resolved a rooted path:: C:\agent-yifhe\_work\1\s
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Generation: '1'
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Key name 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine', value name 'PowerShellVersion': '2.0'
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Unsupported version. Skipping.
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Generation: '3'
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Key name 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine', value name 'PowerShellVersion': '5.1.19041.1'
+[2021-04-12 09:10:19Z INFO PowerShellExeUtil] Key name 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine', value name 'ApplicationBase': 'C:\Windows\System32\WindowsPowerShell\v1.0'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Arguments: '-NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". ([scriptblock]::Create('if ([Console]::InputEncoding -is [Text.UTF8Encoding] -and [Console]::InputEncoding.GetPreamble().Length -ne 0) { [Console]::InputEncoding = New-Object Text.UTF8Encoding $false } if (!$PSHOME) { $null = Get-Item -LiteralPath ''variable:PSHOME'' } else { Import-Module -Name ([System.IO.Path]::Combine($PSHOME, ''Modules\Microsoft.PowerShell.Management\Microsoft.PowerShell.Management.psd1'')) ; Import-Module -Name ([System.IO.Path]::Combine($PSHOME, ''Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1'')) }')) 2>&1 | ForEach-Object { Write-Verbose $_.Exception.Message -Verbose } ; Import-Module -Name 'C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1\ps_modules\VstsTaskSdk\VstsTaskSdk.psd1' -ArgumentList @{ NonInteractive = $true } -ErrorAction Stop ; $VerbosePreference = 'SilentlyContinue' ; $DebugPreference = 'SilentlyContinue' ; Invoke-VstsTaskScript -ScriptBlock ([scriptblock]::Create('. ''C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1\azurepowershell.ps1'''))"'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work\_tasks\AzurePowerShell_72a1931b-effb-4d2e-8fd8-f8472a07cb62\5.184.1'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:19Z INFO ProcessInvokerWrapper] Process started with process id 19704, waiting for process exit.
+[2021-04-12 09:10:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record '7b920b4a-56d1-5395-4267-42324f55afe3', success rate: 1/1.
+[2021-04-12 09:10:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:20Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2021-04-12 09:10:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:24Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:25Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Exited process 19704 with exit code 0
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Finished process 19704 with exit code 0, and elapsed time 00:00:07.3291508.
+[2021-04-12 09:10:26Z INFO StepsRunner] Step result: Failed
+[2021-04-12 09:10:26Z INFO StepsRunner] Update job result with current step result 'Failed'.
+[2021-04-12 09:10:26Z INFO StepsRunner] Current state: job state = 'Failed'
+[2021-04-12 09:10:26Z INFO StepsRunner] Processing step: DisplayName='Component Detection (auto-injected by policy)', ContinueOnError=True, Enabled=True
+[2021-04-12 09:10:26Z INFO ExpressionManager] Evaluating: and(succeeded(), ne(variables['CG_RAN'], 'true'))
+[2021-04-12 09:10:26Z INFO ExpressionManager] Expanded: and(False, ne(variables['CG_RAN'], 'true'))
+[2021-04-12 09:10:26Z INFO ExpressionManager] Result: False
+[2021-04-12 09:10:26Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2021-04-12 09:10:26Z INFO StepsRunner] Processing step: DisplayName='Checkout Az.CloudService@main to s', ContinueOnError=False, Enabled=True
+[2021-04-12 09:10:26Z INFO ExpressionManager] Evaluating: AlwaysNode()
+[2021-04-12 09:10:26Z INFO ExpressionManager] Result: True
+[2021-04-12 09:10:26Z INFO StepsRunner] Starting the step.
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO StepsRunner] Which: 'chcp'
+[2021-04-12 09:10:26Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Process started with process id 18232, waiting for process exit.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Exited process 18232 with exit code 0
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Finished process 18232 with exit code 0, and elapsed time 00:00:00.0073019.
+[2021-04-12 09:10:26Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Tasks': 'C:\agent-yifhe\_work\_tasks'
+[2021-04-12 09:10:26Z INFO TaskRunner] Get handler data for target platform Windows
+[2021-04-12 09:10:26Z INFO TaskRunner] Handler data is of type Microsoft.VisualStudio.Services.Agent.Worker.AgentPluginHandlerData
+[2021-04-12 09:10:26Z INFO WorkerCommandManager] Enable plugin internal command extension.
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Starting process:
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   File name: 'C:\agent-yifhe\bin\Agent.PluginHost.exe'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Arguments: 'task "Agent.Plugins.Repository.CleanupTask, Agent.Plugins"'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Working directory: 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'True'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] OOM score adjustment is Linux-only.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Process started with process id 14956, waiting for process exit.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Close STDIN after the first redirect finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDIN stream write finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Exited process 14956 with exit code 0
+[2021-04-12 09:10:26Z INFO ProcessInvokerWrapper] Finished process 14956 with exit code 0, and elapsed time 00:00:00.2766971.
+[2021-04-12 09:10:26Z INFO WorkerCommandManager] Disable plugin internal command extension.
+[2021-04-12 09:10:26Z INFO StepsRunner] Step result: 
+[2021-04-12 09:10:26Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2021-04-12 09:10:26Z INFO StepsRunner] Current state: job state = 'Failed'
+[2021-04-12 09:10:26Z INFO JobRunner] Finalize job.
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Diag': 'C:\agent-yifhe\_diag'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Bin': 'C:\agent-yifhe\bin'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Root': 'C:\agent-yifhe'
+[2021-04-12 09:10:26Z INFO HostContext] Well known directory 'Work': 'C:\agent-yifhe\_work'
+[2021-04-12 09:10:26Z INFO BuildJobExtension] Total accessible running process: 238.
+[2021-04-12 09:10:26Z INFO JobRunner] Job result after all job steps finish: Failed
+[2021-04-12 09:10:26Z INFO JobRunner] Completing the job execution context.
+[2021-04-12 09:10:26Z INFO JobRunner] Shutting down the job server queue.
+[2021-04-12 09:10:26Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2021-04-12 09:10:26Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b3b67622-0f16-555e-6574-f031225f4b13', success rate: 1/1.
+[2021-04-12 09:10:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'efce1217-bf95-47bb-92c0-2a14bee1f50f', success rate: 1/1.
+[2021-04-12 09:10:27Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2021-04-12 09:10:28Z INFO JobServerQueue] All queue process task stopped.
+[2021-04-12 09:10:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'efce1217-bf95-47bb-92c0-2a14bee1f50f', success rate: 1/1.
+[2021-04-12 09:10:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record '6eec6f85-f71b-4b1d-be46-296220d42622', success rate: 1/1.
+[2021-04-12 09:10:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record '275f1d19-1bd8-5591-b06b-07d489ea915a', success rate: 1/1.
+[2021-04-12 09:10:28Z INFO JobServerQueue] Web console line queue drained.
+[2021-04-12 09:10:28Z INFO JobServerQueue] Uploading 3 files in one shot.
+[2021-04-12 09:10:33Z INFO JobServerQueue] Try to upload 3 log files or attachments, success rate: 3/3.
+[2021-04-12 09:10:33Z INFO JobServerQueue] File upload queue drained.
+[2021-04-12 09:10:33Z INFO JobServerQueue] Timeline update queue drained.
+[2021-04-12 09:10:33Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2021-04-12 09:10:33Z INFO TempDirectoryManager] Cleaning agent temp folder: C:\agent-yifhe\_work\_temp
+[2021-04-12 09:10:33Z INFO JobRunner] Raising job completed event.
+[2021-04-12 09:10:33Z INFO Worker] Job completed.

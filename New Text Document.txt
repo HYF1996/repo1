@@ -1,0 +1,38 @@
+You could define a [user-define variable](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#user-defined-variables) and use it here.
+To add the variable like $System.PullRequest.TargetBranchName, we recommend that you could submit a suggestion ticket to suggest the feature on: https://developercommunity.visualstudio.com/report?space=21&entry=suggestion. That will allow you to directly interact with the appropriate product group, and makes it more convenient for the product group to collect and categorize your suggestions.
+We highly appreciate your contribution in making our product better.
+
+Hi there,
+Please follow the steps below to collect the har file.
+1.In Chrome, go to the page within Box where you are experiencing trouble.
+2.At the top-right of your browser window, click the Chrome menu (⋮).
+3.Select Tools > Developer Tools. The Developer Tools window opens as a docked panel at the side or bottom of Chrome.
+4.Click the Network tab.
+5.Select Preserve log.
+6.You will see a red circle at the top left of the Network tab. This means the capture has started. If the circle is black, click the black circle to start recording activity in your browser.
+7.Refresh the page and reproduce the problem while the capture is running.
+8.After you successfully reproduce the issue, you can export the the har file.
+Then you could compress the har file into a .zip file and upload it again. When you share the information to us, please set it to “Microsoft Only” or “Private to customer (includes Microsoft)”, this will make sure that the information can be only accessed by us. 
+
+Since this API can only be used to get the user's owne profile information, you cannot fetch other user's profile via profile id and I didn't find relevant method to do this. If you need to get other users' profile id, we recommend that you could let the user run the api and find it in the response body.
+
+Sorry for the late reply.
+Please check the steps below and let me know how it goes:
+1.Remove the "Maven central" from upstream source and check how the package will be ingested.
+2.Please confirm if the package "com.microsoft.identity:common3.2.1" exists in internal source.
+3.Check if this issue exists in other packages.
+
+
+
+To create a query with the custom field, you could refer to my following steps:
+API: 
+`https://dev.azure.com/{org name}/{project name}/_apis/wit/queries/{path for query}?api-version=6.0`
+Request body:
+
+```
+{
+  "name": "create query for custom field",
+  "wiql": "Select [System.Id], [System.Title], [System.State] From WorkItems Where [System.WorkItemType] = 'User Story' AND [{custom field name}] = '{value}' "
+}
+```
+Here is my sample:
